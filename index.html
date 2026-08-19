@@ -223,6 +223,55 @@ table.raci td.fn{font-weight:600;background:var(--muted-30);}
 </style>
 </head>
 <body>
+<!--PW-GATE-START (client-side access gate — the approved proposal below is unchanged)-->
+<style>
+#pw-gate{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:radial-gradient(1200px 600px at 50% -10%, #1746c4 0%, #0e1726 62%);font-family:'Plus Jakarta Sans',system-ui,sans-serif;}
+#pw-gate .box{width:100%;max-width:23rem;background:#fff;border-radius:1rem;padding:2.25rem;box-shadow:0 30px 80px -30px rgba(0,0,0,.6);text-align:center;}
+#pw-gate .mk{font-weight:800;font-size:1.4rem;letter-spacing:-.03em;color:#1746c4;}
+#pw-gate .ci{margin-top:.35rem;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5b6678;}
+#pw-gate h1{font-size:1.1rem;font-weight:700;color:#0e1726;margin-top:1.4rem;}
+#pw-gate p{font-size:.85rem;color:#5b6678;margin-top:.4rem;line-height:1.5;font-family:'Source Sans 3',system-ui,sans-serif;}
+#pw-gate form{margin-top:1.3rem;display:flex;flex-direction:column;gap:.6rem;}
+#pw-gate input{width:100%;padding:.75rem .9rem;border:1px solid #e3e8ef;border-radius:.6rem;font-size:.95rem;font-family:'Source Sans 3',system-ui,sans-serif;outline:none;}
+#pw-gate input:focus{border-color:#1746c4;box-shadow:0 0 0 3px rgba(23,70,196,.15);}
+#pw-gate button{width:100%;padding:.75rem;border:none;border-radius:999px;background:#1746c4;color:#fff;font-weight:700;font-size:.9rem;font-family:'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;}
+#pw-gate button:hover{opacity:.92;}
+#pw-gate .err{color:#c0362c;font-size:.8rem;font-weight:600;min-height:1rem;}
+#pw-gate .ft{margin-top:1.1rem;font-size:.66rem;color:#8893a1;font-family:'Source Sans 3',system-ui,sans-serif;}
+body.pw-locked{overflow:hidden;}
+</style>
+<div id="pw-gate">
+  <div class="box">
+    <div class="mk">MVNE</div>
+    <div class="ci">Commercial in confidence</div>
+    <h1>Econet × MVNE — Strategic Proposal</h1>
+    <p>This document is confidential and prepared for Econet Wireless Zimbabwe. Please enter the access code to continue.</p>
+    <form id="pw-form" autocomplete="off">
+      <input id="pw-input" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" />
+      <button type="submit">Open proposal</button>
+      <div class="err" id="pw-err"></div>
+    </form>
+    <div class="ft">Econet Wireless Zimbabwe · MVNE, a division of DSG</div>
+  </div>
+</div>
+<script>
+(function(){
+  var CODE="Econet2026";
+  var KEY="econet_mvne_unlocked";
+  var gate=document.getElementById('pw-gate');
+  function unlock(){ if(gate&&gate.parentNode){gate.parentNode.removeChild(gate);} document.body.classList.remove('pw-locked'); }
+  try{ if(sessionStorage.getItem(KEY)==='1'){ unlock(); return; } }catch(e){}
+  document.body.classList.add('pw-locked');
+  var form=document.getElementById('pw-form'), inp=document.getElementById('pw-input'), err=document.getElementById('pw-err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(inp.value===CODE){ try{sessionStorage.setItem(KEY,'1');}catch(e){} unlock(); }
+    else { err.textContent='Incorrect access code. Please try again.'; inp.value=''; inp.focus(); }
+  });
+  if(inp) inp.focus();
+})();
+</script>
+<!--PW-GATE-END-->
 <div id="view-preread">
 <!-- SLIDE 1 · THE THESIS -->
 <div class="slide dark">
